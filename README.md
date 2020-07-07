@@ -35,6 +35,7 @@
 
 ## Algo a mais que você tenha a dizer:
 
+- Diagramas de classe e banco de dados encontra-se na raiz do projeto
 - A aplicação foi desenvolvida utilizando "Angular 9" e a biblioteca "ng.ant.design" no client. Já no server, foi utilizado .NET Core 3.1, Entity Framework Core e FluentApi.
 - Como banco de dados, foi utilizado um SQL Server na Azure. O mesmo está ativo, caso queira acessar,
   basta utilizar as credencias contidas no arquivo "app.settings.json" do server e utilizar o SQL Server Management Studio.

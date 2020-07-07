@@ -1,0 +1,102 @@
+body {
+	overflow: overlay;
+}
+
+::-webkit-scrollbar {
+	background-color: transparent;
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 16px;
+	background-color: #a0a0a5;
+}
+
+::-webkit-scrollbar-button {
+	display: none;
+}
+
+.avoid-clicks {
+	pointer-events: none;
+	background-color: #f5f5f5;
+}
+
+.disable-select {
+	user-select: none;
+}
+
+.ant-table-pagination.ant-pagination {
+	position: absolute;
+	bottom: -4px;
+	right: 10px;
+}
+
+.ant-collapse-header {
+	display: flex;
+	flex-direction: column;
+}
+
+.ant-table-body {
+	will-change: transform;
+	min-height: 390px;
+}
+
+.ant-layout-content {
+	min-height: calc(100vh - 64px);
+	overflow-y: scroll;
+	padding-top: 25px;
+	will-change: transform;
+}
+
+.ant-menu-inline,
+.ant-menu-vertical {
+	border: none;
+}
+
+.ant-layout.ant-layout-has-sider {
+	overflow: hidden;
+	max-height: 100vh;
+}
+
+.main-layout.ant-layout {
+	overflow: hidden;
+}
+
+.router-loading {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+li {
+	outline: none;
+}
+
+app-login {
+	display: grid;
+	place-items: center;
+	height: calc(100vh - 25px);
+}
+
+.vote-table {
+	nz-table-title-footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 48px;
+	}
+}
+
+.result-table {
+	nz-table-title-footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 48px;
+	}
+}

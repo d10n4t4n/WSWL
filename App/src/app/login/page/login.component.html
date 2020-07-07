@@ -1,0 +1,31 @@
+<div class="login-container">
+  <div class="logo-container">
+    <img style="height: 200px;" src="../assets/logos/white-logo.png">
+  </div>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Por favor, informe um e-mail">
+        <nz-input-group [nzPrefix]="prefixTemplateUser">
+          <input type="text"
+                 nz-input
+                 placeholder="E-mail"
+                 formControlName="email"
+                 class="form-control" />
+        </nz-input-group>
+        <ng-template #prefixTemplateUser><i nz-icon nzType="user"></i></ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Por favor, informe uma senha">
+        <nz-input-group [nzPrefix]="passwordIcon" [nzSuffix]="togglePasswordIcon">
+          <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="Senha" formControlName="password" />
+        </nz-input-group>
+        <ng-template #togglePasswordIcon>
+          <i style="cursor: pointer;" nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
+        </ng-template>
+        <ng-template #passwordIcon><i nz-icon nzType="lock"></i></ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <button nz-button [nzLoading]="loading">Entrar</button>
+  </form>
+</div>

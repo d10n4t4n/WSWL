@@ -1,0 +1,59 @@
+<div class="votacao-container">
+  <nz-input-group *ngIf="!loadingCandidates && canVote" style="margin-bottom: 20px;" [nzSuffix]="suffixIconSearch">
+    <input type="text"
+           nz-input
+           placeholder="Informe o nome, endereço ou fone..."
+           [(ngModel)]="searchTerm"
+           (ngModelChange)="searchCandidate(searchTerm)" />
+  </nz-input-group>
+  <ng-template #suffixIconSearch>
+    <i nz-icon nzType="search"></i>
+  </ng-template>
+  <nz-table *ngIf="canVote; else votedMessage"
+            #table
+            class="vote-table"
+            autoHeightTable
+            nzSize="small"
+            [nzLoading]="loadingCandidates"
+            [nzScroll]="{ y: '43vh' }"
+            [nzShowSizeChanger]="true"
+            [nzData]="candidates"
+            [nzHideOnSinglePage]="false"
+            [nzLoadingIndicator]="spinner"
+            [nzFooter]="footer">
+    <thead>
+      <tr>
+        <th [nzWidth]="'30%'">Nome</th>
+        <th [nzWidth]="'30%'">Endereço</th>
+        <th [nzWidth]="'30%'">Fone</th>
+        <th [nzWidth]="'10%'"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="cursor: pointer;" *ngFor="let candidate of table.data">
+        <td [nzAlign]="'left'">
+          <highlighted-text [needle]="searchTerm" [haystack]="candidate.name"></highlighted-text>
+        </td>
+        <td class="td-ellipsis" [nzAlign]="'left'">
+          <highlighted-text [needle]="searchTerm" [haystack]="candidate.address"></highlighted-text>
+        </td>
+        <td [nzAlign]="'left'">
+          <highlighted-text [needle]="searchTerm" [haystack]="candidate.phone"></highlighted-text>
+        </td>
+        <td>
+          <button nz-button (click)="vote(candidate)">Votar</button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <ng-template #footer>
+    <span style="margin-left: 10px;" *ngIf="!loadingCandidates"><b>{{candidates?.length}} restaurantes encontrados</b></span>
+  </ng-template>
+  <ng-template #spinner>
+    <nz-spin style="min-height: calc(70vh - 25px);" nzTip="Buscando candidatos..." [nzSize]="'large'">
+    </nz-spin>
+  </ng-template>
+  <ng-template #votedMessage>
+    Obrigado pelo seu voto!
+  </ng-template>
+</div>

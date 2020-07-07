@@ -1,0 +1,15 @@
+.votacao-container {
+	width: 1080px;
+	margin: 0 auto;
+	margin-bottom: 50px;
+	padding: 25px;
+	background: #141414;
+	border-radius: 6px;
+}
+
+.td-ellipsis {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 475px;
+}

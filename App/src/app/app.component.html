@@ -1,0 +1,39 @@
+<nz-layout>
+  <nz-sider *ngIf="authenticated" nzCollapsible [(nzCollapsed)]="isCollapsed" nzWidth="230px" [nzTrigger]="null">
+    <div class="logo"
+         [ngStyle]="isCollapsed ? {'transform': 'translateX(-195px) translateY(32px)' , 'transition': 'transform 250ms ease', 'margin-bottom': '53px'} : {}">
+      <img style="height: 200px;" *ngIf="!isCollapsed" src="../assets/logos/white-logo.png">
+      <img *ngIf="isCollapsed" style="transform: translateX(195px); height: 50px;"
+           src="../assets/logos/white-logo-small.png">
+    </div>
+    <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-menu-item routerLink="/votacao" routerLinkActive="ant-menu-item-selected" nz-tooltip
+          nzTooltipPlacement="right" [nzTooltipTitle]="isCollapsed ? 'Votação' : ''">
+        <i nz-icon nzType="like" nzTheme="fill"></i>
+        <span>Votação</span>
+      </li>
+      <li nz-menu-item routerLink="/resultados" routerLinkActive="ant-menu-item-selected" nz-tooltip
+          nzTooltipPlacement="right" [nzTooltipTitle]="isCollapsed ? 'Resultados' : ''">
+        <i nz-icon nzType="file-text" nzTheme="fill"></i>
+        <span>Resultados</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout class="main-layout">
+    <nz-header *ngIf="authenticated">
+      <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+         (click)="isCollapsed = !isCollapsed"></i>
+      <div class="user-info-container">
+        <div class="info">
+          <span>{{loggedUser?.firstName}} {{loggedUser?.lastName}}</span>
+          <span>{{loggedUser?.email}}</span>
+        </div>
+        <button nz-button (click)="logout()">Sair</button>
+      </div>
+    </nz-header>
+    <nz-content>
+      <nz-spin class="router-loading" *ngIf="loading" nzSimple [nzSize]="'large'"></nz-spin>
+      <router-outlet *ngIf="!loading"></router-outlet>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

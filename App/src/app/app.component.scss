@@ -1,0 +1,64 @@
+nz-header {
+	padding: 0;
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	padding-bottom: 64px;
+	box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+	display: flex;
+	justify-content: space-between;
+}
+
+.logo {
+	transition: transform 250ms ease;
+	transform: translateX(0px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 25px;
+
+	.logo-label {
+		position: relative;
+		display: block;
+		z-index: 10;
+		margin-top: -7px;
+		margin-left: 57px;
+		color: #009e49;
+		white-space: nowrap;
+		font-family: 'uni-sans';
+		font-size: 16px;
+	}
+}
+
+nz-sider {
+	// background-color: #fff;
+	box-shadow: rgba(0, 21, 41, 0.08) 0px 1px 4px;
+	z-index: 1000;
+	position: relative;
+}
+
+.user-info-container {
+	display: flex;
+	align-items: center;
+	height: 64px;
+	margin-right: 10px;
+
+	.info {
+		display: flex;
+		flex-direction: column;
+		line-height: initial;
+		margin-right: 15px;
+	}
+}
+
+.trigger {
+	font-size: 18px;
+	line-height: 64px;
+	padding: 0 24px;
+	cursor: pointer;
+	transition: color 0.3s;
+}
+
+.trigger:hover {
+	color: #1890ff;
+}

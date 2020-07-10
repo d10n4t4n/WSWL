@@ -14,12 +14,13 @@
 
 ## Instruções de como utilizar o sistema:
 
-- O projeto possuí duas rotas principais, 'Votação' e 'Resultados'. Para votar, basta acessar a rota Votação e votar no restaurante preferido.
-- Para consultar o resultado de votações anteriores, basta acessar a rota Resultados.
+ - O projeto possuí duas rotas principais, 'Votação' e 'Resultados'. Para votar, basta acessar a rota Votação e votar no restaurante preferido.
+ - Para consultar o resultado de votações anteriores, basta acessar a rota Resultados.
+ - 
   **Usuários disponíveis para teste:**
-  dionatancontato@wswl.com / 123456
-  josephine@wswl.com / 123456
-  sienna@wswl.com / 123456
+ - dionatancontato@wswl.com / 123456 
+ -  josephine@wswl.com / 123456  
+ -  sienna@wswl.com / 123456
 
 ## O que vale destacar no código implementado?
 

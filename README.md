@@ -1,5 +1,6 @@
 
 # Where Should We Lunch (WSWL)
+Aplicação fullstack desenvolvida em Angular 9, ng.ant.design, .NET Core, EF Core, Fluent Api, SQL Server
 
 ## Requisitos de ambiente necessários para compilar e rodar o software:
 

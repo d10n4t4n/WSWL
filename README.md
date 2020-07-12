@@ -25,14 +25,14 @@ Aplicação fullstack desenvolvida em Angular 9, ng.ant.design, .NET Core, EF Co
 ## O que vale destacar no código implementado?
 - A maior parte da regra de negócio está no frontend, essa decisão foi feita para que fosse possível demonstrar conhecimentos mais aprofundados no Angular.
 
-**O que poderia ser feito para melhorar o sistema?**
+## O que poderia ser feito para melhorar o sistema?
 - Transferir toda a regra de negócio para o backend, pois idealmente deve-se mantê-la lá.
 - Implementar autenticação com JWT, não apenas validando e-mail e senha. Após isso, criar um interceptor para que seja adicionado o token no header de toda requisição autenticada.
 - Criptografar a senha no banco de dados
 - Implementar um windows service para que controle estados de agendamento, como por exemplo, dia e hora para iniciar e finalizar as votações.
 - Implementar testes unitários no frontend e backend
 
-**Algumas regras de negócio implementadas no frontend:**
+## Algumas regras de negócio implementadas no frontend:
 - Ao iniciar o frontend, se todas as votações estiverem concluídas, inicia nova votação com StartDate de (today - 12:00pm) e EndDate de (tomorrow - 11:50am)
 - Ao iniciar o frontend, se existir uma votação em andamento, verifica se o EndDate é menor que a data e hora atual, se for, finaliza a votação e inicia uma nova seguindo as mesmas regras anteriores.
 - Ao acessar a rota de votação, verifica se o usuário já votou no dia corrente, caso sim, exibe apenas uma mensagem.

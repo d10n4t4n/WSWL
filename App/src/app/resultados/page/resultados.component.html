@@ -7,12 +7,21 @@
   <i nz-icon nzType="search"></i>
 </ng-template> -->
 
-  <nz-table class="result-table" autoHeightTable nzSize="small" [nzLoading]="loadingPolls" [nzScroll]="{ y: '43vh' }"
-            #table [nzShowSizeChanger]="true" [nzData]="polls" [nzHideOnSinglePage]="false" [nzLoadingIndicator]="spinner" [nzFooter]="footer">
+  <nz-table #table
+            autoHeightTable
+            class="result-table"
+            nzSize="small"
+            [nzLoading]="loadingPolls"
+            [nzScroll]="{ y: '43vh' }"
+            [nzShowSizeChanger]="true"
+            [nzData]="polls"
+            [nzHideOnSinglePage]="false"
+            [nzLoadingIndicator]="spinner"
+            [nzFooter]="footer">
     <thead>
       <tr>
-        <th>Data e hora de início</th>
-        <th>Data e hora de encerramento</th>
+        <th>Data/Hora Início</th>
+        <th>Data/Hora Encerramento</th>
         <th>Status</th>
         <th>Resultado</th>
       </tr>
@@ -25,22 +34,27 @@
         <td [nzAlign]="'left'">
           {{poll.endDate | date:'EEEE, d MMMM, y H:mm'}}
         </td>
-        <td [nzAlign]="'left'">
-          {{poll.result ? 'Concluído' : 'Em andamento'}}
-        </td>
+        <ng-container [ngSwitch]="poll.status">
+          <td *ngSwitchCase="statusEnum.concluded" [nzAlign]="'left'">
+            Concluído
+          </td>
+          <td *ngSwitchCase="statusEnum.inProgress" [nzAlign]="'left'">
+            Em progresso
+          </td>
+          <td *ngSwitchCase="statusEnum.inconclusive" [nzAlign]="'left'">
+            Inconclusivo
+          </td>
+        </ng-container>
         <td [nzAlign]="'left'">
           {{poll.result ? poll.result.name : '---'}}
         </td>
       </tr>
     </tbody>
   </nz-table>
-
   <ng-template #footer>
   </ng-template>
-
   <ng-template #spinner>
     <nz-spin style="min-height: calc(70vh - 25px);" nzTip="Buscando enquetes..." [nzSize]="'large'">
     </nz-spin>
   </ng-template>
-
 </div>

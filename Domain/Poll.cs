@@ -15,6 +15,7 @@ namespace WSWL.Domain
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int? ResultId { get; set; }
+        public int? Status { get; set; }
 
         public virtual Restaurant Result { get; set; }
         public virtual ICollection<PollCandidates> PollCandidates { get; set; }

@@ -68,7 +68,7 @@ export class VotacaoComponent implements OnInit {
 				new Promise((resolve) => {
 					this.userVote.candidateId = candidate.id;
 					this.userVote.pollId = this.currentPoll.id;
-					this.userVote.userId = 1;
+					this.userVote.userId = this.currentUser.id;
 					this.voteService.post(this.userVote).subscribe((res) => {
 						if (res) {
 							this.canVote = false;

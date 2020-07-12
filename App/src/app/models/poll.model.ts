@@ -1,14 +1,14 @@
 import { Restaurant } from './restaurant.model';
 import { Vote } from './vote.model';
-import { PollCandidates } from './pollCandidates.model';
+import { StatusEnum } from './status.enum';
 
 export class Poll {
 	id: number;
 	startDate: Date | string;
 	endDate: Date | string;
 	resultId: number;
+	status: StatusEnum;
 	result: Restaurant;
-	pollCandidates: PollCandidates[];
 	votes: Vote[];
 
 	constructor(init?: Partial<Poll>) {
@@ -17,10 +17,6 @@ export class Poll {
 
 			if (init.result) {
 				this.result = new Restaurant(init.result);
-			}
-
-			if (init.pollCandidates) {
-				this.pollCandidates = init.pollCandidates.map((v) => new PollCandidates(v));
 			}
 
 			if (init.votes) {

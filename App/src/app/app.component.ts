@@ -10,6 +10,7 @@ import moment from 'moment';
 import _ from 'lodash';
 import { RestaurantService } from './data-services/restaurant.service';
 import { Restaurant } from './models/restaurant.model';
+import { StatusEnum } from './models/status.enum';
 
 @Component({
 	selector: 'app-root',
@@ -24,6 +25,7 @@ export class AppComponent implements OnInit {
 	public polls: Poll[];
 	public poll = new Poll();
 	public today = moment(new Date()).format('YYYY-MM-DD');
+	public statusEnum = StatusEnum;
 
 	constructor(
 		private nzConfigService: NzConfigService,
@@ -92,24 +94,37 @@ export class AppComponent implements OnInit {
 	handlePolls(): void {
 		this.pollService.getAll().subscribe((polls) => {
 			this.polls = polls;
-			const allConcluded = this.polls.every((poll) => poll.resultId); // Verifica se todas as votações estão concluídas
+			// Verifica se todas as votações estão concluídas
+			const allConcluded = this.polls.every(
+				(poll) => poll.status === this.statusEnum.concluded || poll.status === this.statusEnum.inconclusive
+			);
+			// Se todas estiverem concluidas, cria e inicia uma votação nova
 			if (allConcluded) {
 				this.createPoll();
 				this.startPoll(this.poll);
 			} else {
-				const currentPoll = this.polls.find((poll) => !poll.resultId); // Busca a votação em andamento
+				// Busca a votação em andamento
+				const currentPoll = this.polls.find((poll) => poll.status === this.statusEnum.inProgress);
+				localStorage.removeItem('currentPoll');
 				localStorage.setItem('currentPoll', JSON.stringify(currentPoll));
+				// Se a endDate da votação em andamento for anterior a data atual, finaliza a votação e inicia uma nova
 				if (moment(currentPoll.endDate).isBefore(new Date())) {
-					// Se a endDate da votação em andamento for anterior a data atual, finaliza a votação e inicia uma nova
-					const winnerId = this.checkPollWinner(currentPoll);
-					currentPoll.resultId = winnerId;
-					// Finaliza a votação atual com o id vencedor
+					// Verifica se a votação atual teve votos
+					if (currentPoll.votes.length > 0) {
+						const winnerId = this.checkPollWinner(currentPoll);
+						currentPoll.resultId = winnerId;
+						currentPoll.status = this.statusEnum.concluded;
+						// Busca o vencedor, insere a data da vitória e atualiza no banco
+						const currentWinner = this.getPollWinner(winnerId);
+						currentWinner.winDate = moment(`${this.today} 12:00:00`).format('YYYY-MM-DD HH:mm:ss');
+						this.updateWinner(currentWinner);
+					} else {
+						// Se a votação não tiver votos, seta status como inconclusivo
+						currentPoll.status = this.statusEnum.inconclusive;
+					}
+					// Finaliza a votação atual
 					this.finishPoll(currentPoll);
-					// Busca o vencedor, insere a data da vitória e atualiza no banco
-					const currentWinner = this.getPollWinner(winnerId);
-					currentWinner.winDate = moment(`${this.today} 12:00:00`).format('YYYY-MM-DD HH:mm:ss');
-					this.updateWinner(currentWinner);
-					// Cria e inicia uma nova votação e atualiza a votação atual no localstorage
+					// Cria e inicia uma nova votação e atualiza a votação atual no localStorage
 					this.createPoll();
 					this.startPoll(this.poll);
 					localStorage.removeItem('currentPoll');
@@ -120,16 +135,18 @@ export class AppComponent implements OnInit {
 	}
 
 	createPoll(): void {
-		// Cria uma nova poll com startDate de (dia atual - 12:00:00) e endDate de (dia atual + 1 - 11:50)
-		this.poll.startDate = moment(`${this.today} 12:00:00`).format('YYYY-MM-DD HH:mm:ss');
-		this.poll.endDate = moment(`${this.today}  11:50:00`).add(1, 'days').format('YYYY-MM-DD HH:mm:ss');
+		// Cria uma nova poll com startDate de (today - 12:00:00) e endDate de (tomorrow - 11:50)
+		this.poll.startDate = moment(`${this.today} 12:00:00`).format('YYYY-MM-DD HH:mm:ss'); // today - 12:00:00
+		this.poll.endDate = moment(`${this.today}  11:50:00`).add(1, 'days').format('YYYY-MM-DD HH:mm:ss'); // tomorrow - 11:50
+		this.poll.status = this.statusEnum.inProgress;
 	}
 
 	checkPollWinner(poll: Poll): number {
 		// Verifica o candidato com maior número de votos e retorna o seu Id
 		const candidateVotes = _.countBy(poll.votes.map((vote) => vote.candidateId));
 		const sortedDesc = _.sortBy(_.toPairs(candidateVotes), 1).reverse();
-		return parseInt(sortedDesc[0][0]);
+		const pollWinnerId = parseInt(sortedDesc[0][0]);
+		return pollWinnerId;
 	}
 
 	getPollWinner(restaurantId: number): Restaurant {

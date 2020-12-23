@@ -6,7 +6,6 @@ import { Vote } from 'src/app/models/vote.model';
 import { NzModalService, NzMessageService } from 'ng-zorro-antd';
 import { Poll } from 'src/app/models/poll.model';
 import moment from 'moment';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { User } from 'src/app/models/user.model';
 
 @Component({
@@ -30,14 +29,13 @@ export class VotacaoComponent implements OnInit {
 		private voteService: VoteService,
 		private modalService: NzModalService,
 		private messageService: NzMessageService
-	) {}
+	) { }
 
 	ngOnInit(): void {
 		this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 		this.loadCandidates();
 		this.currentPoll = JSON.parse(localStorage.getItem('currentPoll'));
 		this.voteService.getAllByUserId(this.currentUser.id).subscribe((votes) => {
-			// Verifica se o usuário já votou no dia atual
 			this.canVote = votes.every((vote) => moment(vote.voteDate).diff(this.today) === 0);
 		});
 	}
@@ -47,7 +45,6 @@ export class VotacaoComponent implements OnInit {
 		this.restaurantService.getAll().subscribe(
 			(candidates) => {
 				this.candidates = candidates;
-				// Filtra os restaurantes que não venceram nos últimos 7 dias
 				this.candidates = this.candidates.filter((v) => moment(this.today).diff(v.winDate, 'days') > 7 || v.winDate === null);
 				this.filteredCandidates = candidates;
 				this.loadingCandidates = false;

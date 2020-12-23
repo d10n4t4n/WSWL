@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -30,10 +29,6 @@ export class LoginComponent implements OnInit {
 			email: ['', Validators.required],
 			password: ['', Validators.required],
 		});
-	}
-
-	get f() {
-		return this.loginForm.controls;
 	}
 
 	onSubmit(): void {

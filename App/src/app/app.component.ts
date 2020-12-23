@@ -68,7 +68,6 @@ export class AppComponent implements OnInit {
 	}
 
 	handleScreenResize(): void {
-		// Verifica a largura da tela no init e depois se inscreve no evento de resize para fechar o menu caso necessário
 		window.innerWidth < 1366 ? (this.isCollapsed = true) : (this.isCollapsed = false);
 		this.viewPortRuler.change(1000).subscribe(() => {
 			window.innerWidth < 1366 ? (this.isCollapsed = true) : (this.isCollapsed = false);
@@ -94,37 +93,28 @@ export class AppComponent implements OnInit {
 	handlePolls(): void {
 		this.pollService.getAll().subscribe((polls) => {
 			this.polls = polls;
-			// Verifica se todas as votações estão concluídas
 			const allConcluded = this.polls.every(
 				(poll) => poll.status === this.statusEnum.concluded || poll.status === this.statusEnum.inconclusive
 			);
-			// Se todas estiverem concluidas, cria e inicia uma votação nova
 			if (allConcluded) {
 				this.createPoll();
 				this.startPoll(this.poll);
 			} else {
-				// Busca a votação em andamento
 				const currentPoll = this.polls.find((poll) => poll.status === this.statusEnum.inProgress);
 				localStorage.removeItem('currentPoll');
 				localStorage.setItem('currentPoll', JSON.stringify(currentPoll));
-				// Se a endDate da votação em andamento for anterior a data atual, finaliza a votação e inicia uma nova
 				if (moment(currentPoll.endDate).isBefore(new Date())) {
-					// Verifica se a votação atual teve votos
 					if (currentPoll.votes.length > 0) {
 						const winnerId = this.checkPollWinner(currentPoll);
 						currentPoll.resultId = winnerId;
 						currentPoll.status = this.statusEnum.concluded;
-						// Busca o vencedor, insere a data da vitória e atualiza no banco
 						const currentWinner = this.getPollWinner(winnerId);
 						currentWinner.winDate = moment(`${this.today} 12:00:00`).format('YYYY-MM-DD HH:mm:ss');
 						this.updateWinner(currentWinner);
 					} else {
-						// Se a votação não tiver votos, seta status como inconclusivo
 						currentPoll.status = this.statusEnum.inconclusive;
 					}
-					// Finaliza a votação atual
 					this.finishPoll(currentPoll);
-					// Cria e inicia uma nova votação e atualiza a votação atual no localStorage
 					this.createPoll();
 					this.startPoll(this.poll);
 					localStorage.removeItem('currentPoll');
@@ -136,13 +126,12 @@ export class AppComponent implements OnInit {
 
 	createPoll(): void {
 		// Cria uma nova poll com startDate de (today - 12:00:00) e endDate de (tomorrow - 11:50)
-		this.poll.startDate = moment(`${this.today} 12:00:00`).format('YYYY-MM-DD HH:mm:ss'); // today - 12:00:00
-		this.poll.endDate = moment(`${this.today}  11:50:00`).add(1, 'days').format('YYYY-MM-DD HH:mm:ss'); // tomorrow - 11:50
+		this.poll.startDate = moment(`${this.today} 12:00:00`).format('YYYY-MM-DD HH:mm:ss');
+		this.poll.endDate = moment(`${this.today}  11:50:00`).add(1, 'days').format('YYYY-MM-DD HH:mm:ss');
 		this.poll.status = this.statusEnum.inProgress;
 	}
 
 	checkPollWinner(poll: Poll): number {
-		// Verifica o candidato com maior número de votos e retorna o seu Id
 		const candidateVotes = _.countBy(poll.votes.map((vote) => vote.candidateId));
 		const sortedDesc = _.sortBy(_.toPairs(candidateVotes), 1).reverse();
 		const pollWinnerId = parseInt(sortedDesc[0][0]);
@@ -150,7 +139,6 @@ export class AppComponent implements OnInit {
 	}
 
 	getPollWinner(restaurantId: number): Restaurant {
-		// Busca o candidato vencedor
 		let winner = new Restaurant();
 		this.restaurantService.getById(restaurantId).subscribe((restaurant) => {
 			if (restaurant) {
@@ -162,7 +150,7 @@ export class AppComponent implements OnInit {
 
 	updateWinner(restaurant: Restaurant): void {
 		this.restaurantService.post(restaurant).subscribe(
-			() => {},
+			() => { },
 			(err) => {
 				console.log(err);
 			}
@@ -171,7 +159,7 @@ export class AppComponent implements OnInit {
 
 	startPoll(poll: Poll): void {
 		this.pollService.post(poll).subscribe(
-			(res) => {},
+			(res) => { },
 			(err) => {
 				console.log(err);
 			}
@@ -180,7 +168,7 @@ export class AppComponent implements OnInit {
 
 	finishPoll(poll: Poll): void {
 		this.pollService.post(poll).subscribe(
-			(res) => {},
+			(res) => { },
 			(err) => {
 				console.log(err);
 			}

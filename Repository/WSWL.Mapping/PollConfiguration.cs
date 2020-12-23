@@ -16,8 +16,6 @@ namespace WSWL.Mapping
 
             entity.Property(e => e.ResultId).HasColumnName("result_id");
 
-            entity.Property(e => e.Status);
-
             entity.HasOne(d => d.Result)
                   .WithMany(p => p.Polls)
                   .HasForeignKey(d => d.ResultId)

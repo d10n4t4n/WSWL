@@ -3,10 +3,11 @@ import { Restaurant } from 'src/app/models/restaurant.model';
 import { RestaurantService } from 'src/app/data-services/restaurant.service';
 import { VoteService } from 'src/app/data-services/vote.service';
 import { Vote } from 'src/app/models/vote.model';
-import { NzModalService, NzMessageService } from 'ng-zorro-antd';
 import { Poll } from 'src/app/models/poll.model';
 import moment from 'moment';
 import { User } from 'src/app/models/user.model';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
 	selector: 'app-votacao',

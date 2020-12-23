@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, SimpleChange, HostListener, ChangeDetectorRef, AfterViewInit } from '@angular/core';
-import { NzTableComponent } from 'ng-zorro-antd';
+import { NzTableComponent } from 'ng-zorro-antd/table';
 
 @Directive({
 	selector: '[autoHeightTable]',

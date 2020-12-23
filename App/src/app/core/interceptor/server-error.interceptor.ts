@@ -5,7 +5,7 @@ import { delay, retryWhen, concatMap } from 'rxjs/operators';
 
 @Injectable()
 export class ServerErrorInterceptor implements HttpInterceptor {
-	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+	intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 		const attempts = 0;
 		return next
 			.handle(request)

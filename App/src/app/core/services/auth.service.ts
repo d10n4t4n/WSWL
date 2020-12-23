@@ -39,4 +39,8 @@ export class AuthService {
 	public get currentUserValue(): User {
 		return this.currentUserSubject.value;
 	}
+
+	get isLoggedIn(): boolean {
+		return !!localStorage.getItem('currentUser');
+	}
 }

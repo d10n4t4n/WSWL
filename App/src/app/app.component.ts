@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NzConfigService } from 'ng-zorro-antd';
 import { Router, RouterEvent, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { AuthService } from './core/services/auth.service';
@@ -11,6 +10,7 @@ import _ from 'lodash';
 import { RestaurantService } from './data-services/restaurant.service';
 import { Restaurant } from './models/restaurant.model';
 import { StatusEnum } from './models/status.enum';
+import { NzConfigService } from 'ng-zorro-antd/core/config';
 
 @Component({
 	selector: 'app-root',
@@ -58,6 +58,9 @@ export class AppComponent implements OnInit {
 				case event instanceof NavigationCancel:
 				case event instanceof NavigationError: {
 					this.loading = false;
+					if (this.router.url === '/login' && this.auth.isLoggedIn) {
+						this.router.navigate(['']);
+					}
 					break;
 				}
 				default: {
@@ -76,7 +79,7 @@ export class AppComponent implements OnInit {
 
 	handleUserState(): void {
 		this.auth.currentUser.subscribe((user) => {
-			if (user !== null) {
+			if (user) {
 				this.authenticated = true;
 				this.loggedUser = user;
 			} else {

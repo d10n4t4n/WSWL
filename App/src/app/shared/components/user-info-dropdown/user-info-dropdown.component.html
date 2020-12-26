@@ -1,0 +1,23 @@
+<div class="user-info-container" nz-dropdown nzTrigger="hover" [nzDropdownMenu]="menu" nzPlacement="bottomRight" (nzVisibleChange)="onDropdownChange($event)">
+  <a>
+    <nz-avatar nzIcon="user"></nz-avatar>
+    <div class="user-name">
+      <span class="name">{{loggedUser?.firstName | titlecase}}</span>
+      <span class="role">{{loggedUser?.role | titlecase}}</span>
+    </div>
+    <i nz-icon nzType="caret-down" nzTheme="outline" [ngClass]="{'arrow-open' : arrowState}"></i>
+  </a>
+  <nz-dropdown-menu #menu="nzDropdownMenu">
+    <ul nz-menu nzSelectable>
+      <div class="info-header">
+        <span>Signed in as</span>
+        <span><b>{{loggedUser.firstName | titlecase}} {{loggedUser.lastName | titlecase}}</b></span>
+      </div>
+      <li nz-menu-divider></li>
+      <li nz-menu-item (click)="logout()">
+        <i nz-icon nzType="logout" nzTheme="outline"></i>
+        <span>Sign out</span>
+      </li>
+    </ul>
+  </nz-dropdown-menu>
+</div>

@@ -4,11 +4,11 @@ import { PollService } from 'src/app/data-services/poll.service';
 import { StatusEnum } from 'src/app/models/status.enum';
 
 @Component({
-	selector: 'app-resultados',
-	templateUrl: './resultados.component.html',
-	styleUrls: ['./resultados.component.scss'],
+	selector: 'app-poll-result',
+	templateUrl: './poll-result.component.html',
+	styleUrls: ['./poll-result.component.scss'],
 })
-export class ResultadosComponent implements OnInit {
+export class PollResultComponent implements OnInit {
 	public polls: Poll[];
 	public loadingPolls = false;
 	public statusEnum = StatusEnum;

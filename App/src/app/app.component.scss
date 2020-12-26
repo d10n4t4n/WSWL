@@ -6,7 +6,6 @@ nz-header {
 	padding-bottom: 64px;
 	box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 	display: flex;
-	justify-content: space-between;
 }
 
 .logo {
@@ -25,30 +24,15 @@ nz-header {
 		margin-left: 57px;
 		color: #009e49;
 		white-space: nowrap;
-		font-family: 'uni-sans';
+		font-family: "uni-sans";
 		font-size: 16px;
 	}
 }
 
 nz-sider {
-	// background-color: #fff;
-	box-shadow: rgba(0, 21, 41, 0.08) 0px 1px 4px;
+	box-shadow: 2px 0 6px rgb(0 0 0 / 35%);
 	z-index: 1000;
 	position: relative;
-}
-
-.user-info-container {
-	display: flex;
-	align-items: center;
-	height: 64px;
-	margin-right: 10px;
-
-	.info {
-		display: flex;
-		flex-direction: column;
-		line-height: initial;
-		margin-right: 15px;
-	}
 }
 
 .trigger {
@@ -61,4 +45,15 @@ nz-sider {
 
 .trigger:hover {
 	color: #1890ff;
+}
+
+.header-menus {
+	display: flex;
+	margin-left: auto;
+}
+
+nz-divider {
+	height: 30px;
+	margin-top: 18px;
+	border-left-width: 2px;
 }

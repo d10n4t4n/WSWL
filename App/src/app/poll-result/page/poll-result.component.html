@@ -1,12 +1,4 @@
 <div class="result-container">
-  <!-- <nz-input-group *ngIf="!loadingUsers" style="margin-bottom: 20px;" [nzSuffix]="suffixIconSearch">
-  <input type="text" nz-input placeholder="Pesquisar: Informe o nome, cargo ou matrícula..." [(ngModel)]="searchTerm"
-      (ngModelChange)="searchPassenger(searchTerm)" />
-</nz-input-group>
-<ng-template #suffixIconSearch>
-  <i nz-icon nzType="search"></i>
-</ng-template> -->
-
   <nz-table #table
             autoHeightTable
             class="result-table"
@@ -20,10 +12,10 @@
             [nzFooter]="footer">
     <thead>
       <tr>
-        <th>Data/Hora Início</th>
-        <th>Data/Hora Encerramento</th>
+        <th>Start Date/Time</th>
+        <th>Closure Date/Time</th>
         <th>Status</th>
-        <th>Resultado</th>
+        <th>Result</th>
       </tr>
     </thead>
     <tbody>
@@ -36,13 +28,13 @@
         </td>
         <ng-container [ngSwitch]="poll.status">
           <td *ngSwitchCase="statusEnum.concluded" [nzAlign]="'left'">
-            Concluído
+            Concluded
           </td>
           <td *ngSwitchCase="statusEnum.inProgress" [nzAlign]="'left'">
-            Em progresso
+            In progress
           </td>
           <td *ngSwitchCase="statusEnum.inconclusive" [nzAlign]="'left'">
-            Inconclusivo
+            Inconclusive
           </td>
         </ng-container>
         <td [nzAlign]="'left'">

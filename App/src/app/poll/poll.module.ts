@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { VotacaoRoutingModule } from './votacao-routing.module';
-import { VotacaoComponent } from './page/votacao.component';
+import { PollRoutingModule } from './poll-routing.module';
+import { PollComponent } from './page/poll.component';
 import { AntdModule } from '../antd.module';
 import { HighlightedTextComponent } from '../core/utils/highlighted-text/highlighted-text.component';
 
 @NgModule({
-	declarations: [VotacaoComponent, HighlightedTextComponent],
-	imports: [CommonModule, FormsModule, ReactiveFormsModule, VotacaoRoutingModule, AntdModule],
+	declarations: [PollComponent, HighlightedTextComponent],
+	imports: [CommonModule, FormsModule, ReactiveFormsModule, PollRoutingModule, AntdModule],
 })
-export class VotacaoModule {}
+export class PollModule {}

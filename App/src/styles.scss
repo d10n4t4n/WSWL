@@ -42,7 +42,7 @@ body {
 
 .ant-table-body {
 	will-change: transform;
-	min-height: 390px;
+	// min-height: 390px;
 }
 
 .ant-layout-content {
@@ -84,6 +84,10 @@ app-login {
 }
 
 .vote-table {
+	nz-table-inner-scroll {
+		min-height: 503px;
+	}
+
 	nz-table-title-footer {
 		display: flex;
 		align-items: center;
@@ -99,4 +103,20 @@ app-login {
 		justify-content: space-between;
 		height: 48px;
 	}
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-box-shadow: 0 0 0 30px#393F44 inset !important;
+	box-shadow: 0 0 0 30px #393f44 inset !important;
+	-webkit-text-fill-color: rgba(255, 255, 255, 0.85) !important;
+}
+
+input {
+	-webkit-background-clip: text;
+	-moz-background-clip: text;
+	background-clip: text;
+	font: 400 13px sans-serif !important;
 }

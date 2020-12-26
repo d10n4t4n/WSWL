@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
 
 	ngOnInit() {
 		this.handleUserState();
-		this.handleRouterLoading();
+		// this.handleRouterLoading();
 		this.handleScreenResize();
 		this.handlePolls();
 	}
@@ -87,10 +87,6 @@ export class AppComponent implements OnInit {
 				this.loggedUser = null;
 			}
 		});
-	}
-
-	logout(): void {
-		this.auth.logout();
 	}
 
 	handlePolls(): void {

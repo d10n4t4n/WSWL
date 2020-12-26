@@ -1,5 +1,5 @@
 .login-container {
-	max-width: 360px;
+	width: 240px;
 	margin-top: -200px;
 	display: flex;
 	flex-direction: column;
@@ -8,5 +8,15 @@
 	form {
 		display: flex;
 		flex-direction: column;
+		width: 100%;
 	}
+}
+
+nz-input-group {
+	background-color: #393F44;
+}
+
+nz-form-control {
+	width: 100%;
+  margin-bottom: 15px;
 }

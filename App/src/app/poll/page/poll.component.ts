@@ -10,11 +10,11 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
-	selector: 'app-votacao',
-	templateUrl: './votacao.component.html',
-	styleUrls: ['./votacao.component.scss'],
+	selector: 'app-poll',
+	templateUrl: './poll.component.html',
+	styleUrls: ['./poll.component.scss'],
 })
-export class VotacaoComponent implements OnInit {
+export class PollComponent implements OnInit {
 	public candidates: Restaurant[];
 	public filteredCandidates: Restaurant[] = [];
 	public userVote = new Vote();
@@ -37,7 +37,7 @@ export class VotacaoComponent implements OnInit {
 		this.loadCandidates();
 		this.currentPoll = JSON.parse(localStorage.getItem('currentPoll'));
 		this.voteService.getAllByUserId(this.currentUser.id).subscribe((votes) => {
-			this.canVote = votes.every((vote) => moment(vote.voteDate).diff(this.today) === 0);
+			this.canVote = votes.every((vote) => moment(vote.voteDate).diff(this.today) <= 0);
 		});
 	}
 
@@ -61,7 +61,7 @@ export class VotacaoComponent implements OnInit {
 			nzTitle: 'Confirmação',
 			nzOkText: 'Sim',
 			nzCancelText: 'Não',
-			nzContent: `Tem certeza que deseja votar no restaurante ${candidate.name}?`,
+			nzContent: `Are you sure you want to vote on the restaurant ${candidate.name}?`,
 			nzOnOk: () =>
 				new Promise((resolve) => {
 					this.userVote.candidateId = candidate.id;
@@ -71,7 +71,7 @@ export class VotacaoComponent implements OnInit {
 						if (res) {
 							this.canVote = false;
 							resolve(true);
-							this.messageService.success(`Voto registrado com sucesso!`);
+							this.messageService.success(`Vote successfully registered!`);
 						}
 					});
 				}),

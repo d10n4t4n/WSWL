@@ -4,12 +4,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule, LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LOCALE_ID } from '@angular/core';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AntdModule } from './antd.module';
 import { AutoHeightTableDirective } from './core/directives/auto-height-table.directive';
 import { httpInterceptorProviders } from './core/interceptor';
+import { UserInfoDropdownComponent } from './shared/components/user-info-dropdown/user-info-dropdown.component';
+import { LanguageSelectorComponent } from './shared/components/language-selector/language-selector.component';
 
 @NgModule({
 	imports: [
@@ -22,11 +24,10 @@ import { httpInterceptorProviders } from './core/interceptor';
 		ReactiveFormsModule,
 		AntdModule,
 	],
-	declarations: [AppComponent, AutoHeightTableDirective],
+	declarations: [LanguageSelectorComponent, UserInfoDropdownComponent, AppComponent, AutoHeightTableDirective],
 	entryComponents: [],
 	providers: [
 		[httpInterceptorProviders],
-		{ provide: LOCALE_ID, useValue: 'pt-BR' },
 		{ provide: LocationStrategy, useClass: HashLocationStrategy },
 	],
 	bootstrap: [AppComponent],

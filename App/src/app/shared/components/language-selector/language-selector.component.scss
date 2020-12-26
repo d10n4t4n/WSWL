@@ -1,0 +1,19 @@
+@import '/src/app/shared/scss/colors.scss';
+
+.language-selector {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  padding: 0 15px;
+  cursor: pointer;
+  a {
+    i {
+      color: #ffffff;
+      transition: color 250ms ease;
+    }
+  }
+
+  &:hover a i{
+    color: $primary;
+  }
+}

@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
 	ngOnInit() {
 		this.formInit();
-		this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/votacao';
+		this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/poll';
 	}
 
 	formInit(): void {

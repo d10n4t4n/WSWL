@@ -9,21 +9,21 @@ const routes: Routes = [
 	},
 	{
 		path: '',
-		redirectTo: 'votacao',
+		redirectTo: 'poll',
 		pathMatch: 'full',
 		canActivate: [AuthGuard],
 	},
 	{
-		path: 'votacao',
-		loadChildren: () => import('./votacao/votacao.module').then((m) => m.VotacaoModule),
+		path: 'poll',
+		loadChildren: () => import('./poll/poll.module').then((m) => m.PollModule),
 		canActivate: [AuthGuard],
 	},
 	{
-		path: 'resultados',
-		loadChildren: () => import('./resultados/resultados.module').then((m) => m.ResultadosModule),
+		path: 'poll-result',
+		loadChildren: () => import('./poll-result/poll-result.module').then((m) => m.PollResultModule),
 		canActivate: [AuthGuard],
 	},
-	{ path: '**', redirectTo: 'votacao' },
+	{ path: '**', redirectTo: 'poll' },
 ];
 
 @NgModule({

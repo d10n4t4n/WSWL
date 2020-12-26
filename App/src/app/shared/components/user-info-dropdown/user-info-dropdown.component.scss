@@ -1,0 +1,55 @@
+@import "/src/app/shared/scss/colors.scss";
+
+.user-info-container {
+	display: flex;
+	align-items: center;
+	height: 64px;
+	padding: 0 15px;
+	cursor: pointer;
+	margin-right: 4px;
+	a {
+		display: flex;
+		align-items: center;
+		color: rgba(255, 255, 255, 0.85);
+		i {
+			transition: transform 250ms ease;
+		}
+	}
+	&:hover nz-avatar {
+		border-color: $primary;
+	}
+}
+
+.user-name {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 4px;
+	span {
+		margin-right: 8px;
+		line-height: normal;
+	}
+	.name {
+		font-weight: 600;
+	}
+	.role {
+		font-size: 12px;
+	}
+}
+
+.info-header {
+	display: flex;
+	flex-direction: column;
+	padding: 8px 16px;
+}
+
+nz-avatar {
+	margin-right: 8px;
+	border: 1px solid;
+	border-color: #ffffff;
+	margin-bottom: 2px;
+	transition: border-color 250ms ease;
+}
+
+.arrow-open {
+	transform: rotate(-180deg);
+}

@@ -1,8 +1,8 @@
-<div class="votacao-container">
+<nz-card [nzLoading]="loadingCandidates" nzTitle="Restaurant Poll" class="poll-container">
   <nz-input-group *ngIf="!loadingCandidates && canVote" style="margin-bottom: 20px;" [nzSuffix]="suffixIconSearch">
     <input type="text"
            nz-input
-           placeholder="Informe o nome, endereço ou fone..."
+           placeholder="Search for name, address or phone ..."
            [(ngModel)]="searchTerm"
            (ngModelChange)="searchCandidate(searchTerm)" />
   </nz-input-group>
@@ -15,7 +15,7 @@
             autoHeightTable
             nzSize="small"
             [nzLoading]="loadingCandidates"
-            [nzScroll]="{ y: '43vh' }"
+            [nzScroll]="{ y: '49vh' }"
             [nzShowSizeChanger]="true"
             [nzData]="candidates"
             [nzHideOnSinglePage]="false"
@@ -41,13 +41,18 @@
           <highlighted-text [needle]="searchTerm" [haystack]="candidate.phone"></highlighted-text>
         </td>
         <td>
-          <button nz-button (click)="vote(candidate)">Votar</button>
+          <button nz-button (click)="vote(candidate)">Vote</button>
         </td>
       </tr>
     </tbody>
   </nz-table>
   <ng-template #footer>
-    <span style="margin-left: 10px;" *ngIf="!loadingCandidates"><b>{{candidates?.length}} restaurantes encontrados</b></span>
+    <span style="margin-left: 10px;" *ngIf="!loadingCandidates && candidates.length > 0">
+      <b [ngPlural]="candidates.length">
+        <ng-template ngPluralCase="=1">1 candidate found</ng-template>
+        <ng-template ngPluralCase="other">{{candidates.length}} candidates found</ng-template>
+      </b>
+    </span>
   </ng-template>
   <ng-template #spinner>
     <nz-spin style="min-height: calc(70vh - 25px);" nzTip="Buscando candidatos..." [nzSize]="'large'">
@@ -56,4 +61,4 @@
   <ng-template #votedMessage>
     Obrigado pelo seu voto!
   </ng-template>
-</div>
+</nz-card>
